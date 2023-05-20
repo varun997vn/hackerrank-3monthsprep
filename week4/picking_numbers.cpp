@@ -14,6 +14,7 @@ vector<string> split(const string &);
  */
 
 int pickingNumbers(vector<int> a) {
+    /* Time: O(NLogN ), Space: O(1)
     int result=1, count=1, start=0;
     sort(a.begin(), a.end());
     
@@ -34,7 +35,15 @@ int pickingNumbers(vector<int> a) {
         result=count;
     }
     
-    return result;
+    return result; */
+
+    // Time: O(N), Space: O(N)
+    vector<int> counts(100,0);
+    for (auto c: a) counts[c]++;
+    int maxC = 0;
+    for (int i=0; i<a.size()-1; i++)
+        maxC = max(maxC, counts[i] + counts[i+1]);
+    return maxC; 
 }
 
 int main()
