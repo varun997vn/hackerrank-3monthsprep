@@ -16,10 +16,34 @@ vector<string> split(const string &);
  */
 
 vector<int> rotateLeft(int d, vector<int> arr) {
+    /* Using Extra Space, Time: O(N), Space O(N)
     vector<int> ans;
     for (int i=d; i<arr.size(); i++) ans.push_back(arr[i]);
     for (int i=0; i<d; i++) ans.push_back(arr[i]);
-    return ans;
+    return ans; */
+    
+    /* Juggling Algorithm, Time: O(N), Space O(1) */
+    int n = arr.size();
+    d = d%n;
+    int gcd = __gcd(n, d);
+    
+    for (int i=0; i<gcd; i++) {
+        int t=arr[i];
+        int j=i;
+        while (1) {
+            int k = j + d;
+            if (k >= n)
+                k = k - n;
+ 
+            if (k == i)
+                break;
+ 
+            arr[j] = arr[k];
+            j = k;
+        }
+        arr[j] = t;
+    }
+    return arr;
 }
 
 int main()
